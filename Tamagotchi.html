@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="jquery-2.2.3.js"></script>
+ <style>
+     
+  #tamagotchi-img {
+    width: 400px;
+    padding-left: 400px;
+  }
+     button {
+         margin-bottom: 20px;
+         padding: 40px;
+     }
+ </style>
+</head>
+<body>
+ <img id="tamagotchi-img" src=http://images.clipartpanda.com/dog-clipart-dog-clipart4.png />
+ <div id="stats-wrapper">
+  <span><b>Fullness:</b></span>
+  <span id="fullness"></span><br />
+  <span><b>Happiness:</b></span>
+  <span id="happiness"></span>
+ </div>
+
+ <button id="feed-btn">Feed</button>
+ <button id="pet-btn">Scratch My Head</button>
+    
+    
+ <script>
+  'use strict';
+     
+  var tamagotchi = { 
+      
+      fullness: 500, 
+      happiness: 500 
+  };
+
+   var countdown = setInterval(function(){
+   tamagotchi.fullness = tamagotchi.fullness - 5;
+   tamagotchi.happiness = tamagotchi.happiness - 5;
+       if(tamagotchi.fullness <= 0){
+           this.clearInterval(countdown)
+           console.log("Sparky is dead :(")
+           alert ("Sparky is Dead! Mom!!!")
+       }
+
+   $('#fullness').text(tamagotchi.fullness);
+   $('#happiness').text(tamagotchi.happiness);
+   }, 1000);
+
+  $('#feed-btn').click(function(){
+   tamagotchi.fullness += Math.floor((Math.random() * 5) + 1);
+  });
+
+  $('#pet-btn').click(function(){
+   tamagotchi.happiness += Math.floor((Math.random() * 5) + 1);
+ });
+
+ $('#tamagotchi-img').click(function() {
+      var random = Math.floor(Math.random()*5);
+        if(random == 4) {
+        tamagotchi.fullness += 100;
+        tamagotchi.happiness += 100;
+        console.log(tamagotchi.fullness)
+        console.log(tamagotchi.happiness)
+
+        }
+        else if (random <= 3) {
+        tamagotchi.fullness -= 100;
+        tamagotchi.happiness -= 100;
+        console.log(tamagotchi.fullness)
+        console.log(tamagotchi.happiness) 
+        }
+    }); 
+
+       </script>
+   </body>
+</html>
