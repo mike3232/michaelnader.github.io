@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Load jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+        
+        
+        <!-- Latest compiled and minified CSS of Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme for Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript for Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="css/style_twit.css">
+        
+    </head>
+
+    <body>
+       <div> <h1>THE TWEETS!</h1></div>
+        <div id="tweets-container"></div>
+
+        <script>  
+            var currentPage = 1;
+            function addContent() {
+                $.get('http://clevelandcodes-sample-api.herokuapp.com/tweets.json?page=' + currentPage, function(response) {
+                    for(var i = 0; i < response.tweets.length; i++) {
+					// Create a div element, but don't append it to an element on the page yet
+					var $div = $('<div />').addClass('tweet');
+					// Next few lines are just adding the content I want inside the tweet div
+					$div.append('<p>ID:' + response.tweets[i].id + '</p>');
+					$div.append('<p>Content:' + response.tweets[i].content + '</p>');
+					$div.append('<p>User ID:' + response.tweets[i].user_id + '</p>');
+					$div.append('<p><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>:' + response.tweets[i].retweet_count + '</p>');
+					$div.append('<p><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>:' + response.tweets[i].retweet_count + '</p>');
+					// Append the div that's not attached to any element yet and append it to the end of #tweets-container
+					$('#tweets-container').append($div);
+				}
+             });
+            };
+            addContent();
+            
+            var offset = 300; // PX
+            $(document).on('scroll', function(e) {
+                console.log('ScrollTop:', $(window).scrollTop());
+                console.log('Formula:', $(document).height() - $(window).height() - offset);
+                if($(window).scrollTop() >= $(document).height() - $(window).height() - offset) {
+                    currentPage++;
+                    addContent();
+                }
+            });
+        </script>
+    </body>
+</html>

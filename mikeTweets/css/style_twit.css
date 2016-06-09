@@ -1,0 +1,31 @@
+body{
+   background: url("http://www.freevectordownload.com/site-images/Large/blue-wind-vector-background-452.JPG");
+   background-repeat: repeat;
+}
+   
+.center {
+	text-align: center;
+}
+
+#navBar {
+	float: center;
+	position: top;
+}
+
+#tweets-container{
+   color: black;
+   background-color: yellow;
+   margin: 0 auto;
+   margin-top: 15px;
+   width: 400px;
+   border: 5px solid;
+   border-radius: 4%;
+   text-align: center;
+}
+
+div{
+    padding: 40px;
+}
+h1{
+    text-align: center;
+}
