@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Load jQuery -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+       
+        </script>
+        
+        <style>
+            body {
+                background-image: url("https://media.giphy.com/media/OKAm4abf2MRnq/giphy.gif");
+                background-size: cover;
+                overflow: scroll;
+                }
+            .img {                
+                width: 50px;
+                height: 50px;
+                position: fixed;
+                top: -60px;
+                left: 100px;
+            }
+            .img2 {
+                 width: 50px;
+                height: 50px;
+                position: fixed;
+                top: -60px;
+                left: 100px;                
+            }
+            #score-box{
+                width: 100px;
+                height: 50px;
+                border: 2px solid #fff;
+                border-radius: 4%;
+                background-color: #fff;
+            }
+            
+            #score{
+                color: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="score-box"></div>
+        
+        <script>
+        
+            //set up score and counter
+            var counter = 0;
+            var score = 0;
+            
+            //set interval for square drops
+            setInterval(function() {
+                if(Math.random() < 0.5) {
+                    $('body').append('<img src="img/bear.gif" id="bear-' + counter + '" class="img"></img>');
+                    $('#bear-' + counter).css('left', $(window).width() * Math.random());
+                    $('#bear-' + counter).animate(
+                        { top: $(window).height() }, 
+                        Math.floor(Math.random() * 4000 + 1000), 
+                        function(){
+                            $(this).remove();
+                        }
+                    );
+                    counter++;
+                }
+            }, 500);
+            
+            setInterval(function() {
+                if(Math.random() < 0.5) {
+                    $('body').append('<img src="img/flower.gif" id="flower-' + counter + '" class="img2"></img>');
+                    $('#flower-' + counter).css('left', $(window).width() * Math.random());
+                    $('#flower-' + counter).animate(
+                        { top: $(window).height() }, 
+                        Math.floor(Math.random() * 8000 + 5000), 
+                        function(){
+                            $(this).remove();
+                        }
+                    );
+                    counter++;
+                }
+            }, 500);
+            
+            $('body').on('click','.img', function() {
+                score += 11;
+                $("#score-box").html("<span id='score'>Score: " + score + "</span>"); //this puts score in the box with the id "score-box"
+                console.log(score);
+            });
+                
+            $('body').on('click','.img2', function() {
+               score -= 20;
+                console.log(score);
+            });
+            
+        </script>
+    </body>
+</html>
